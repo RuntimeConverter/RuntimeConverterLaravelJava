@@ -25,4 +25,4 @@ The output at "http://localhost:8080/public/index.php" is the standard laravel w
 
 ### Attribution
 
-The code in this repository is converted from *MULTIPLE* sources gathered together by the "composer.json" file in the laravel project. The source code and for the INPUT code is provided inside of the folder "larvel" and subtree. See laravel/vendor/*/*. Additionally, the provision of MIT license for this code is only for the translated work and is still subject to the licenses provided by each INPUT file.
+The code in this repository is converted from *MULTIPLE* sources gathered together by the "composer.json" file in the laravel project. The source code for the INPUT code is provided inside of the folder "larvel" and subtree. See laravel/vendor/*/*. Additionally, the provision of MIT license for this code is only for the translated work and is still subject to the licenses provided by each INPUT file.
