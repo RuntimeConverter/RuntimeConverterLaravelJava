@@ -1,4 +1,4 @@
-# RuntimeConverterLaravelJava
+# Runtime Converter Laravel Java Demo
 Example conversion of laravel done by the Runtime Converter (RuntimeConverter.com)
 
 ### Usage (for testing only)
@@ -25,6 +25,8 @@ The code in this repository is licensed via MIT license, but note that this does
 ### Output
 
 The output at "http://localhost:8080/public/index.php" is the standard laravel welcome screen.
+
+![Java Output](raw/master/laravel-converted/output.png?raw=true "Java Output")
 
 ### Attribution
 
