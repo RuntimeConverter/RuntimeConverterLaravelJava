@@ -9,7 +9,7 @@ Example conversion of laravel done by the Runtime Converter (RuntimeConverter.co
 
 ### Platforms
 
-Currently works on Mac OS and Linux. JNI code is downloaded via gradle.
+Currently works on Mac OS and Linux. JNI binaries are downloaded via gradle.
 
 Requires JVM 8+ installed.
 
