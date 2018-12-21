@@ -1,0 +1,36 @@
+    public function match($pathinfo)
+    {
+        $allow = $allowSchemes = array();
+        if ($ret = $this->doMatch($pathinfo, $allow, $allowSchemes)) {
+            return $ret;
+        }
+        if ($allow) {
+            throw new MethodNotAllowedException(array_keys($allow));
+        }
+        if (!in_array($this->context->getMethod(), array('HEAD', 'GET'), true)) {
+            // no-op
+        } elseif ($allowSchemes) {
+            redirect_scheme:
+            $scheme = $this->context->getScheme();
+            $this->context->setScheme(key($allowSchemes));
+            try {
+                if ($ret = $this->doMatch($pathinfo)) {
+                    return $this->redirect($pathinfo, $ret['_route'], $this->context->getScheme()) + $ret;
+                }
+            } finally {
+                $this->context->setScheme($scheme);
+            }
+        } elseif ('/' !== $pathinfo) {
+            $pathinfo = '/' !== $pathinfo[-1] ? $pathinfo.'/' : substr($pathinfo, 0, -1);
+            if ($ret = $this->doMatch($pathinfo, $allow, $allowSchemes)) {
+                return $this->redirect($pathinfo, $ret['_route']) + $ret;
+            }
+            if ($allowSchemes) {
+                goto redirect_scheme;
+            }
+        }
+
+        throw new ResourceNotFoundException();
+    }
+
+    private function doMatch(string $rawPathinfo, array &$allow = array(), array &$allowSchemes = array()): ?array

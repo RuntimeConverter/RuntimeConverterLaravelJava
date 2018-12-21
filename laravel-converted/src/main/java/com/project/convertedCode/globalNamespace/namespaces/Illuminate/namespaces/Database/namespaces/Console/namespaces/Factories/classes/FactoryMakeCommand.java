@@ -1,0 +1,199 @@
+package com.project.convertedCode.globalNamespace.namespaces.Illuminate.namespaces.Database.namespaces.Console.namespaces.Factories.classes;
+
+import com.runtimeconverter.runtime.nativeFunctions.string.function_str_replace;
+import com.runtimeconverter.runtime.passByReference.PassByReferenceArgs;
+import com.project.convertedCode.globalNamespace.namespaces.Illuminate.namespaces.Console.classes.GeneratorCommand;
+import com.runtimeconverter.runtime.classes.RuntimeClassBase;
+import com.runtimeconverter.runtime.RuntimeEnv;
+import com.runtimeconverter.runtime.ZVal;
+import com.runtimeconverter.runtime.reflection.ReflectionClassData;
+import com.runtimeconverter.runtime.annotations.ConvertedParameter;
+import com.runtimeconverter.runtime.arrays.ZPair;
+import java.lang.invoke.MethodHandles;
+import com.runtimeconverter.runtime.classes.NoConstructor;
+import com.runtimeconverter.runtime.annotations.ConvertedMethod;
+import com.project.convertedCode.globalNamespace.namespaces.Symfony.namespaces.Component.namespaces.Console.namespaces.Input.classes.InputOption;
+import static com.runtimeconverter.runtime.ZVal.toStringR;
+import static com.runtimeconverter.runtime.ZVal.toObjectR;
+import static com.runtimeconverter.runtime.ZVal.assignParameter;
+
+/*
+
+ Converted with The Runtime Converter (runtimeconverter.com)
+
+ vendor/laravel/framework/src/Illuminate/Database/Console/Factories/FactoryMakeCommand.php
+
+*/
+
+public class FactoryMakeCommand extends GeneratorCommand {
+
+    public FactoryMakeCommand(RuntimeEnv env, Object... args) {
+        super(env);
+        // Super class property overrides
+        this.name = "make:factory";
+        this.description = "Create a new model factory";
+        this.type = "Factory";
+        if (this.getClass() == FactoryMakeCommand.class) {
+            this.__construct(env, args);
+        }
+    }
+
+    public FactoryMakeCommand(NoConstructor n) {
+        super(n);
+    }
+
+    @ConvertedMethod
+    protected Object getStub(RuntimeEnv env, Object... args) {
+        return ZVal.assign(
+                toStringR(
+                                env.addRootFilesystemPrefix(
+                                        "/vendor/laravel/framework/src/Illuminate/Database/Console/Factories"),
+                                env)
+                        + "/stubs/factory.stub");
+    }
+
+    @ConvertedMethod
+    @ConvertedParameter(index = 0, name = "name")
+    protected Object buildClass(RuntimeEnv env, Object... args) {
+        Object name = assignParameter(args, 0, false);
+        Object model = null;
+        model =
+                ZVal.assign(
+                        ZVal.isTrue(
+                                        env.callMethod(
+                                                this, "option", FactoryMakeCommand.class, "model"))
+                                ? env.callMethod(
+                                        this,
+                                        "qualifyClass",
+                                        FactoryMakeCommand.class,
+                                        env.callMethod(
+                                                this, "option", FactoryMakeCommand.class, "model"))
+                                : "Model");
+        return ZVal.assign(
+                function_str_replace
+                        .f
+                        .env(env)
+                        .call("DummyModel", model, super.buildClass(env, name))
+                        .value());
+    }
+
+    @ConvertedMethod
+    @ConvertedParameter(index = 0, name = "name")
+    protected Object getPath(RuntimeEnv env, Object... args) {
+        Object name = assignParameter(args, 0, false);
+        name =
+                function_str_replace
+                        .f
+                        .env(env)
+                        .call(
+                                ZVal.arrayFromList("\\", "/"),
+                                "",
+                                env.callMethod(this, "argument", FactoryMakeCommand.class, "name"))
+                        .value();
+        return ZVal.assign(
+                toStringR(
+                                env.callMethod(
+                                        toObjectR(this)
+                                                .accessProp(this, env)
+                                                .name("laravel")
+                                                .value(),
+                                        "databasePath",
+                                        FactoryMakeCommand.class),
+                                env)
+                        + toStringR("/factories/" + toStringR(name, env) + ".php", env));
+    }
+
+    @ConvertedMethod
+    protected Object getOptions(RuntimeEnv env, Object... args) {
+        return ZVal.assign(
+                ZVal.newArray(
+                        new ZPair(
+                                0,
+                                ZVal.newArray(
+                                        new ZPair(0, "model"),
+                                        new ZPair(1, "m"),
+                                        new ZPair(2, InputOption.CONST_VALUE_OPTIONAL),
+                                        new ZPair(3, "The name of the model")))));
+    }
+
+    public static final Object CONST_class =
+            "Illuminate\\Database\\Console\\Factories\\FactoryMakeCommand";
+
+    // Runtime Converter Internals
+    // RuntimeStaticCompanion contains static methods
+    // RequestStaticProperties contains static (per-request) properties
+    // ReflectionClassData contains php reflection data used by the runtime library
+
+    public static class RuntimeStaticCompanion extends GeneratorCommand.RuntimeStaticCompanion {
+
+        private static final MethodHandles.Lookup staticCompanionLookup = MethodHandles.lookup();
+    }
+
+    public static final RuntimeStaticCompanion runtimeStaticObject = new RuntimeStaticCompanion();
+
+    private static final ReflectionClassData runtimeConverterReflectionData =
+            ReflectionClassData.builder()
+                    .setName("Illuminate\\Database\\Console\\Factories\\FactoryMakeCommand")
+                    .setLookup(
+                            FactoryMakeCommand.class,
+                            MethodHandles.lookup(),
+                            RuntimeStaticCompanion.staticCompanionLookup)
+                    .setLocalProperties(
+                            "aliases",
+                            "application",
+                            "applicationDefinitionMerged",
+                            "applicationDefinitionMergedWithArgs",
+                            "code",
+                            "definition",
+                            "description",
+                            "description",
+                            "description",
+                            "files",
+                            "help",
+                            "helperSet",
+                            "hidden",
+                            "hidden",
+                            "ignoreValidationErrors",
+                            "input",
+                            "laravel",
+                            "name",
+                            "name",
+                            "name",
+                            "output",
+                            "processTitle",
+                            "signature",
+                            "synopsis",
+                            "type",
+                            "type",
+                            "usages",
+                            "verbosity",
+                            "verbosityMap")
+                    .setFilename(
+                            "vendor/laravel/framework/src/Illuminate/Database/Console/Factories/FactoryMakeCommand.php")
+                    .addExtendsClass("Illuminate\\Console\\GeneratorCommand")
+                    .addExtendsClass("Illuminate\\Console\\Command")
+                    .addExtendsClass("Symfony\\Component\\Console\\Command\\Command")
+                    .get();
+
+    @Override
+    public ReflectionClassData getRuntimeConverterReflectionData() {
+        return runtimeConverterReflectionData;
+    }
+
+    @Override
+    public Object converterRuntimeCallExtended(
+            RuntimeEnv env,
+            String method,
+            Class<?> caller,
+            PassByReferenceArgs passByReferenceArgs,
+            Object... args) {
+        return RuntimeClassBase.converterRuntimeCallExtendedWithDataStatic(
+                this,
+                runtimeConverterReflectionData,
+                env,
+                method,
+                caller,
+                passByReferenceArgs,
+                args);
+    }
+}

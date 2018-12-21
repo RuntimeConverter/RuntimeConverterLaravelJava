@@ -1,0 +1,35 @@
+/
+            \A
+            # 1. Extract the template marker
+            (?:(\#\@\+|\#\@\-)\n?)?
+
+            # 2. Extract the summary
+            (?:
+              (?! @\pL ) # The summary may not start with an @
+              (
+                [^\n.]+
+                (?:
+                  (?! \. \n | \n{2} )     # End summary upon a dot followed by newline or two newlines
+                  [\n.] (?! [ \t]* @\pL ) # End summary when an @ is found as first character on a new line
+                  [^\n.]+                 # Include anything else
+                )*
+                \.?
+              )?
+            )
+
+            # 3. Extract the description
+            (?:
+              \s*        # Some form of whitespace _must_ precede a description because a summary must be there
+              (?! @\pL ) # The description may not start with an @
+              (
+                [^\n]+
+                (?: \n+
+                  (?! [ \t]* @\pL ) # End description when an @ is found as first character on a new line
+                  [^\n]+            # Include anything else
+                )*
+              )
+            )?
+
+            # 4. Extract the tags (anything that follows)
+            (\s+ [\s\S]*)? # everything that follows
+            /ux
