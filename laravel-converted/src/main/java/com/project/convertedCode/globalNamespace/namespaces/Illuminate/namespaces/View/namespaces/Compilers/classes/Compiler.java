@@ -9,7 +9,9 @@ import com.runtimeconverter.runtime.reflection.ReflectionClassData;
 import com.runtimeconverter.runtime.annotations.ConvertedParameter;
 import com.runtimeconverter.runtime.arrays.ZPair;
 import java.lang.invoke.MethodHandles;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.runtimeconverter.runtime.nativeClasses.spl.exceptions.InvalidArgumentException;
 import com.runtimeconverter.runtime.classes.NoConstructor;
@@ -62,29 +64,24 @@ public abstract class Compiler extends RuntimeClassBase {
     @ConvertedMethod
     @ConvertedParameter(index = 0, name = "path")
     public Object getCompiledPath(RuntimeEnv env, Object... args) {
-        Object path = assignParameter(args, 0, false);
-        return ZVal.assign(
+        String path = ZVal.toStringR(assignParameter(args, 0, false));
+        path = Paths.get(path).getFileName().toString();
+        String result =
                 toStringR(this.cachePath, env)
                         + "/"
                         + toStringR(NamespaceGlobal.sha1.env(env).call(path).value(), env)
-                        + ".php");
+                        + ".php";
+        Path resultPath = Paths.get(result);
+        if (!Files.exists(resultPath)){
+            throw new RuntimeException("Cannot file \""+resultPath+"\"");
+        }
+        return result;
     }
 
     @ConvertedMethod
     @ConvertedParameter(index = 0, name = "path")
     public Object isExpired(RuntimeEnv env, Object... args) {
-        Object path = assignParameter(args, 0, false);
-        Object compiled = null;
-        compiled = this.getCompiledPath(env, path);
-        if (!ZVal.isTrue(env.callMethod(this.files, "exists", Compiler.class, compiled))) {
-            return ZVal.assign(true);
-        }
-
-        return ZVal.assign(
-                ZVal.isGreaterThanOrEqualTo(
-                        env.callMethod(this.files, "lastModified", Compiler.class, path),
-                        ">=",
-                        env.callMethod(this.files, "lastModified", Compiler.class, compiled)));
+        return false;
     }
 
     public static final Object CONST_class = "Illuminate\\View\\Compilers\\Compiler";
