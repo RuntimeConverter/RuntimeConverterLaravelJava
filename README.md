@@ -26,7 +26,7 @@ The code in this repository is licensed via MIT license, but note that this does
 
 The output at "http://localhost:8080/public/index.php" is the standard laravel welcome screen.
 
-![Screenshot](master/laravel-converted/output.png)
+![Screenshot](laravel-converted/output.png)
 
 ### Attribution
 
