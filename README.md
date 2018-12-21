@@ -16,6 +16,7 @@ Requires JVM 8+ installed.
 ### Folder structure
 
 /laravel contains the INPUT files (PHP)
+
 /laravel-converted contains the OUTPUT files (Java)
 
 ### License
