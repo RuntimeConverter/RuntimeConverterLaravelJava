@@ -21,14 +21,14 @@ import com.runtimeconverter.runtime.classes.StaticMethodUtils;
 
  Converted with The Runtime Converter (runtimeconverter.com)
 
- storage/framework/views/924f7b5b4478b4d86efeeda6a6ca03808d7a7244.php
+ storage/framework/views/2c1202d75829794083f5a88b12edfebb14380fcf.php
 
 */
 
-public class file_924f7b5b4478b4d86efeeda6a6ca03808d7a7244_php implements RuntimeIncludable {
+public class file_2c1202d75829794083f5a88b12edfebb14380fcf_php implements RuntimeIncludable {
 
-    public static final file_924f7b5b4478b4d86efeeda6a6ca03808d7a7244_php instance =
-            new file_924f7b5b4478b4d86efeeda6a6ca03808d7a7244_php();
+    public static final file_2c1202d75829794083f5a88b12edfebb14380fcf_php instance =
+            new file_2c1202d75829794083f5a88b12edfebb14380fcf_php();
 
     public final void include(RuntimeEnv env, RuntimeStack stack) throws IncludeEventException {
         Scope229 scope = new Scope229();
@@ -46,7 +46,7 @@ public class file_924f7b5b4478b4d86efeeda6a6ca03808d7a7244_php implements Runtim
                                 env.callMethod(
                                         app.f.env(env).call().value(),
                                         "getLocale",
-                                        file_924f7b5b4478b4d86efeeda6a6ca03808d7a7244_php.class))
+                                        file_2c1202d75829794083f5a88b12edfebb14380fcf_php.class))
                         .value());
 
         env.echo(ZVal.getResourceAsString("stringLiterals/stringLiteral53.txt"));
@@ -61,9 +61,9 @@ public class file_924f7b5b4478b4d86efeeda6a6ca03808d7a7244_php implements Runtim
                             env.callMethod(
                                     auth.f.env(env).call().value(),
                                     "guard",
-                                    file_924f7b5b4478b4d86efeeda6a6ca03808d7a7244_php.class),
+                                    file_2c1202d75829794083f5a88b12edfebb14380fcf_php.class),
                             "check",
-                            file_924f7b5b4478b4d86efeeda6a6ca03808d7a7244_php.class))) {
+                            file_2c1202d75829794083f5a88b12edfebb14380fcf_php.class))) {
 
                 env.echo("                        <a href=\"");
                 env.echo(e.f.env(env).call(url.f.env(env).call("/home").value()).value());
@@ -92,7 +92,7 @@ public class file_924f7b5b4478b4d86efeeda6a6ca03808d7a7244_php implements Runtim
             new ContextConstants()
                     .setDir("/storage/framework/views")
                     .setFile(
-                            "/storage/framework/views/924f7b5b4478b4d86efeeda6a6ca03808d7a7244.php");
+                            "/storage/framework/views/2c1202d75829794083f5a88b12edfebb14380fcf.php");
 
     public ContextConstants getContextConstants() {
         return runtimeConverterContextContantsInstance;
