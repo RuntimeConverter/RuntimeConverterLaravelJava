@@ -21,74 +21,42 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
-	mavenLocal()
+	maven {
+		url "https://s3.amazonaws.com/runtimeconverter-releases/maven/release"
+	}
 }
 
 
 dependencies {
 	compile("org.springframework.boot:spring-boot-starter-web")
-	compile group: 'com.runtimeconverter', name: 'runtimeconverterlib', version: '3.0.2'
+	compile group: 'com.runtimeconverter', name: 'runtimeconverterlib', version: '3.1'
+	if (file("/etc/fedora-release").exists()){
+		def fedora = file("/etc/fedora-release").text
+		if (fedora.startsWith("Fedora release 28")) {
+			compile group: 'com.runtimeconverter.native', name: 'fedora-28', version: '3.1'
+		}
+	}
+	if (file("/etc/redhat-release").exists()){
+		def redhat = file("/etc/redhat-release").text
+		if (redhat.startsWith("CentOS Linux release 7")) {
+				compile group: 'com.runtimeconverter.native', name: 'centos-7', version: '3.1'
+		}
+	}
+	if (file("/etc/issue").exists()){
+		def etcIssue = file("/etc/issue").text
+		if (etcIssue.startsWith("Ubuntu 16.04")) {
+			compile group: 'com.runtimeconverter.native', name: 'ubuntu-16-04', version: '3.1'
+		}
+		if (etcIssue.startsWith("Ubuntu 18.04")) {
+			compile group: 'com.runtimeconverter.native', name: 'ubuntu-18-04', version: '3.1'
+		}
+	}
+	if (System.getProperty("os.name").toLowerCase().equals("mac os x")){
+		compile group: 'com.runtimeconverter.native', name: 'mac-14', version: '3.1'
+	}
 }
 
 bootRun {
     args "RuntimeConverterGradleBootRun"
     systemProperty "runtimeConverterScriptName", System.getProperty("runtimeConverterScriptName")
-    systemProperty "RUNTIME_RCPHP_EXECUTABLE", "/var/runtimeConverter/RCEmbedded"
-    systemProperty "RUNTIME_JNI_LIBRARY", "/var/runtimeConverter/libRuntimeConverter-JNI.bin"
-    if (System.getProperty("server.port")){
-        systemProperty "server.port", System.getProperty("server.port")
-    }
-	if (System.getProperty("runtimeConverterRouterScriptName") != null) {
-		systemProperty "runtimeConverterRouterScriptName", System.getProperty("runtimeConverterRouterScriptName")
-	}
-
-	if (System.getProperty("runtimeConverterTracer") != null) {
-	    // -DruntimeConverterTracer=1
-	    systemProperty "RUNTIME_CONVERTER_XDEBUG_TRACE_FILE", System.getProperty("user.dir")+"/workingDirectory/trace.xt"
-	    jvmArgs = ["-javaagent:/home/elijah/RuntimeConverter/runtimeconverterlibrary-java/other/instrumentation/build/libs/runtimeConverterInstrumentation-1.0-SNAPSHOT.jar"]
-	}
-}
-
-task executeCLI(type:JavaExec) {
-    main = 'com.project.convertedCode.Application'
-    classpath = sourceSets.main.runtimeClasspath
-	args "test arg"
-    systemProperty "runtimeConverterScriptName", System.getProperty("runtimeConverterScriptName")
-    if (project.hasProperty("runtimeConverterCurrentDirectory")){
-        systemProperty "runtimeConverterCurrentDirectory", project.property("runtimeConverterCurrentDirectory")
-    }
-}
-
-
-task debugTest(type:JavaExec) {
-	main = 'com.project.convertedCode.Application'
-	classpath = sourceSets.main.runtimeClasspath
-	args "test arg"
-	systemProperty "runtimeConverterScriptName", "/runtimeConverterDebugTest.php"
-	systemProperty "RUNTIME_RCPHP_EXECUTABLE", "/var/runtimeConverter/RCEmbedded"
-	systemProperty "RUNTIME_JNI_LIBRARY", "/var/runtimeConverter/libRuntimeConverter-JNI.bin"
-}
-
-task debugTestInstrumentation(type:JavaExec) {
-	main = 'com.project.convertedCode.Application'
-	classpath = sourceSets.main.runtimeClasspath
-	args "test arg"
-	systemProperty "runtimeConverterScriptName", "/runtimeConverterDebugTest.php"
-	systemProperty "RUNTIME_RCPHP_EXECUTABLE", "/var/runtimeConverter/RCEmbedded"
-	systemProperty "RUNTIME_JNI_LIBRARY", "/var/runtimeConverter/libRuntimeConverter-JNI.bin"
-
-	systemProperty "RUNTIME_CONVERTER_XDEBUG_TRACE_FILE", System.getProperty("user.dir")+"/workingDirectory/trace.xt"
-	jvmArgs = ["-javaagent:/home/elijah/RuntimeConverter/runtimeconverterlibrary-java/other/instrumentation/build/libs/runtimeConverterInstrumentation-1.0-SNAPSHOT.jar"]
-}
-
-task phpUnitDebug(type:JavaExec) {
-	main = 'com.project.convertedCode.Application'
-	classpath = sourceSets.main.runtimeClasspath
-	args "tests/EmailTest"
-	systemProperty "runtimeConverterScriptName", "/phpunitTest.php"
-	systemProperty "RUNTIME_RCPHP_EXECUTABLE", "/var/runtimeConverter/RCEmbedded-Debug"
-	systemProperty "RUNTIME_JNI_LIBRARY", "/var/runtimeConverter/libRuntimeConverter-JNI.bin"
-    if (project.hasProperty("EMBED_STATS")){
-        systemProperty "EMBED_STATS", "1"
-    }
 }
