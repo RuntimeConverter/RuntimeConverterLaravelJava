@@ -7,11 +7,13 @@ Example conversion of laravel done by the Runtime Converter (RuntimeConverter.co
 2) `./gradlew bootRun`
 3) In browser navigate to http://localhost:8080/public/index.php
 
-### Platforms
+### Platforms and Dependencies
 
 Currently works on Mac OS and Linux. JNI binaries are downloaded via gradle.
 
 Requires JVM 8+ installed.
+
+Requires PHP extensions not yet distributed with maven or converted to Java.
 
 ### Folder structure
 
